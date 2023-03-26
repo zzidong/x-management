@@ -14,16 +14,16 @@ public class MenuManager {
 	public static void main(String[] args) {
 		
 		Scanner input = new Scanner(System.in);
-		ClotheManager closetManager = getObject("closetmanager.ser");
-		if (closetManager == null) {
-			closetManager = new ClotheManager(input);
+		ScheduleManager ResearchScheduleManager = getObject("ResearchScheduleManager.ser");
+		if (ResearchScheduleManager == null) {
+			ResearchScheduleManager = new ScheduleManager(input);
 		}
 				
-		selectMenu(input, closetManager);
-		putObject(closetManager, "closetmanager.ser");
+		selectMenu(input, ResearchScheduleManager);
+		putObject(ResearchScheduleManager, "ResearchScheduleManager.ser");
 	}
 	
-	public static void selectMenu(Scanner input, ClotheManager closetManager) {
+	public static void selectMenu(Scanner input,ResearchScheduleManager ScheduleManager) {
 		int num = -1;
 		while (num != 5) {
 			try {
@@ -31,20 +31,20 @@ public class MenuManager {
 				num = input.nextInt();
 				switch(num) {
 				case 1:
-					closetManager.addClothes();
-					logger.log("add a clothe");
+					ResearchScheduleManager.addSchedule();
+					logger.log("add a Schedule");
 					break;
 				case 2:
-					closetManager.deleteClothes();
-					logger.log("delete a clothe");
+					ResearchScheduleManager.deleteSchedule();
+					logger.log("delete a Schedule");
 					break;
 				case 3:
-					closetManager.editClothes();
-					logger.log("edit a clothe");
+					ResearchScheduleManager.editSchedule();
+					logger.log("edit a Schedule");
 					break;
 				case 4:
-					closetManager.viewClothes();
-					logger.log("view a list of clothe");
+					ResearchScheduleManager.viewSchedule();
+					logger.log("view Schedule");
 					break;
 				default:
 					continue;				
@@ -61,17 +61,17 @@ public class MenuManager {
 	}
 	
 	public static void showMenu() {
-		System.out.println("Closet Management System Menu ***");
-		System.out.println(" 1. Add Clothes");
-		System.out.println(" 2. Delete Clothes");
-		System.out.println(" 3. Edit Clothes");
-		System.out.println(" 4. View Clothes");
+		System.out.println("ResearchSchedule System Menu ***");
+		System.out.println(" 1. Add Schedule");
+		System.out.println(" 2. Delete Schedule");
+		System.out.println(" 3. Edit Schedules");
+		System.out.println(" 4. View Schedule");
 		System.out.println(" 5. Exit");
 		System.out.println("Select one number between 1 - 6:");
 	}
 	
-	public static ClotheManager getObject(String filename) {
-		ClotheManager closetManager = null;
+	public static ScheduleManager getObject(String filename) {
+		ResearchScheduleManager ScheduleManager = null;
 		
 		
 		
@@ -79,12 +79,12 @@ public class MenuManager {
 			FileInputStream file = new FileInputStream(filename);
 			ObjectInputStream in = new ObjectInputStream(file);
 			
-			closetManager = (ClotheManager)in.readObject();
+			ScheduleManager = (ResearchScheduleManager)in.readObject();
 			
 			in.close();
 			file.close();	
 		} catch (FileNotFoundException e) {
-			return closetManager;
+			return ScheduleManager;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,15 +93,15 @@ public class MenuManager {
 			e.printStackTrace();
 		}
 
-		return closetManager;
+		return ScheduleManager;
 	}
 	
-	public static void putObject(ClotheManager closetManager, String filename) {
+	public static void putObject(ScheduleManager ResearchScheduleManager, String filename) {
 		try {
 			FileOutputStream file = new FileOutputStream(filename);
 			ObjectOutputStream out = new ObjectOutputStream(file);
 			
-			out.writeObject(closetManager);
+			out.writeObject(ScheduleManager);
 			
 			out.close();
 			file.close();
